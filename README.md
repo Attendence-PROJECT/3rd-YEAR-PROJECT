@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Smart Attendance Management System
 
 Full-stack attendance platform with role-based access (student, teacher, admin), expiring session QR codes, camera-based scanning, MongoDB persistence, JWT authentication, and reporting dashboards.
@@ -224,3 +225,6 @@ Camera streams are stopped and cleared on component unmount (`useQrScanner` clea
 ## License
 
 MIT (adjust as needed for your institution).
+=======
+# 3rd-YEAR-PROJECT
+>>>>>>> 98d73d6c89cf34b5b0fa1a1cd8be083fc1875719
