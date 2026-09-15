@@ -48,19 +48,25 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 p-4">
-      <div className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h1 className="text-2xl font-bold">Register</h1>
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#050505] p-4">
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(5,5,5,0.7),rgba(5,5,5,0.7)),url('../../GPA.jpg')] bg-cover bg-center bg-no-repeat" />
+      <div className="w-full max-w-lg rounded-3xl border border-white/15 bg-white/[0.08] p-8 shadow-2xl backdrop-blur-2xl">
+        <div className="mb-6">
+          <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-cyan-300/80">Welcome</p>
+          <h1 className="text-3xl font-bold text-white">Create account</h1>
+        </div>
         <Alert message={error} onClose={() => setError('')} />
         <form onSubmit={handleSubmit} className="mt-4 space-y-3">
-          <div className="flex gap-2">
+          <div className="flex gap-2 rounded-2xl border border-white/10 bg-black/20 p-1">
             {['student', 'teacher'].map((r) => (
               <button
                 key={r}
                 type="button"
                 onClick={() => setRole(r)}
-                className={`flex-1 rounded-lg border px-3 py-2 text-sm capitalize ${
-                  role === r ? 'border-brand-600 bg-brand-50 text-brand-700' : 'border-slate-200'
+                className={`flex-1 rounded-xl px-3 py-2 text-sm capitalize transition ${
+                  role === r
+                    ? 'bg-gradient-to-r from-cyan-400 to-sky-500 text-[#03131a] shadow-lg shadow-cyan-950/30'
+                    : 'text-white/60 hover:bg-white/5'
                 }`}
               >
                 {r}
@@ -72,7 +78,7 @@ export default function RegisterPage() {
             required
             value={form.name}
             onChange={(e) => update('name', e.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2"
+            className="w-full"
           />
           <input
             type="email"
@@ -80,7 +86,7 @@ export default function RegisterPage() {
             required
             value={form.email}
             onChange={(e) => update('email', e.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2"
+            className="w-full"
           />
           <input
             type="password"
@@ -89,7 +95,7 @@ export default function RegisterPage() {
             minLength={6}
             value={form.password}
             onChange={(e) => update('password', e.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2"
+            className="w-full"
           />
           {role === 'student' && (
             <>
@@ -98,14 +104,14 @@ export default function RegisterPage() {
                 required
                 value={form.rollNumber}
                 onChange={(e) => update('rollNumber', e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                className="w-full"
               />
               <input
                 placeholder="Class (e.g. CSE-A)"
                 required
                 value={form.class}
                 onChange={(e) => update('class', e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                className="w-full"
               />
             </>
           )}
@@ -115,26 +121,26 @@ export default function RegisterPage() {
               required
               value={form.employeeId}
               onChange={(e) => update('employeeId', e.target.value)}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2"
+              className="w-full"
             />
           )}
           <input
             placeholder="Department (optional)"
             value={form.department}
             onChange={(e) => update('department', e.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2"
+            className="w-full"
           />
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-lg bg-brand-600 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
+            className="w-full rounded-xl bg-gradient-to-r from-cyan-400 to-sky-500 py-3 text-sm font-semibold text-[#03131a] shadow-lg shadow-cyan-950/30 hover:brightness-110 disabled:opacity-70"
           >
             {submitting ? 'Creating account...' : 'Register'}
           </button>
         </form>
-        <p className="mt-4 text-center text-sm">
+        <p className="mt-6 text-center text-sm text-white/60">
           Already have an account?{' '}
-          <Link to="/login" className="text-brand-600 hover:underline">
+          <Link to="/login" className="font-medium text-white hover:text-cyan-200 hover:underline">
             Sign in
           </Link>
         </p>

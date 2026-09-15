@@ -13,6 +13,5 @@ const studentSchema = new mongoose.Schema(
 );
 
 studentSchema.index({ class: 1 });
-studentSchema.index({ rollNumber: 1 });
 
 export default mongoose.model('Student', studentSchema);

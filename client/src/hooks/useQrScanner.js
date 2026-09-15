@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 
-export function useQrScanner(onScan) {
+export function useQrScanner(onScan, enabled = false) {
   const scannerRef = useRef(null);
   const onScanRef = useRef(onScan);
   const [error, setError] = useState('');
@@ -13,6 +13,20 @@ export function useQrScanner(onScan) {
   }, [onScan]);
 
   useEffect(() => {
+    if (!enabled) {
+      const instance = scannerRef.current;
+      if (instance) {
+        instance
+          .stop()
+          .then(() => instance.clear())
+          .catch(() => {});
+      }
+      scannerRef.current = null;
+      setActive(false);
+      setError('');
+      return;
+    }
+
     let cancelled = false;
     const scanner = new Html5Qrcode(elementId);
     scannerRef.current = scanner;
@@ -50,7 +64,7 @@ export function useQrScanner(onScan) {
       scannerRef.current = null;
       setActive(false);
     };
-  }, []);
+  }, [enabled]);
 
   return { error, active, elementId };
 }

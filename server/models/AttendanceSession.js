@@ -14,7 +14,6 @@ const attendanceSessionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-attendanceSessionSchema.index({ sessionToken: 1 });
 attendanceSessionSchema.index({ teacher: 1, status: 1 });
 attendanceSessionSchema.index({ expiresAt: 1 });
 

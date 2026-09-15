@@ -29,13 +29,13 @@ export default function StudentHistoryPage() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold">Attendance history</h2>
+      <h2 className="text-2xl font-bold text-white">Attendance history</h2>
       {records.length === 0 ? (
-        <p className="mt-4 text-slate-500">No records yet.</p>
+        <p className="mt-4 text-white/70">No records yet.</p>
       ) : (
-        <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="min-w-full text-left text-sm">
-            <thead className="bg-slate-50 text-slate-600">
+        <div className="mt-4 overflow-x-auto rounded-xl border border-white/15 bg-white/8 shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+          <table className="min-w-full text-left text-sm text-white/80">
+            <thead className="bg-white/5 text-white/80">
               <tr>
                 <th className="px-4 py-3">Date</th>
                 <th className="px-4 py-3">Subject</th>
@@ -45,7 +45,7 @@ export default function StudentHistoryPage() {
             </thead>
             <tbody>
               {records.map((r) => (
-                <tr key={r._id} className="border-t border-slate-100">
+                <tr key={r._id} className="border-t border-white/10">
                   <td className="px-4 py-3">{new Date(r.date).toLocaleDateString()}</td>
                   <td className="px-4 py-3">{r.subject?.name}</td>
                   <td className="px-4 py-3 capitalize">{r.status}</td>

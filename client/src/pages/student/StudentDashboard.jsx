@@ -35,11 +35,17 @@ export default function StudentDashboard() {
   const stats = data?.stats || {};
   const bySubject = data?.bySubject || [];
 
+  const statCards = [
+    ['Overall attendance', `${stats.percentage ?? 0}%`],
+    ['Sessions attended', stats.presentCount ?? 0],
+    ['Today', stats.markedToday ? 'Present' : 'Not marked', stats.markedToday?.subject?.name],
+  ];
+
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-slate-900">Dashboard</h2>
-        <p className="text-slate-500">Welcome back, {user.name}</p>
+        <h2 className="text-2xl font-bold text-white">Dashboard</h2>
+        <p className="text-white/70">Welcome back, {user.name}</p>
       </div>
 
       {stats.lowAttendanceWarning && (
@@ -50,27 +56,23 @@ export default function StudentDashboard() {
       )}
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <StatCard label="Overall attendance" value={`${stats.percentage ?? 0}%`} />
-        <StatCard label="Sessions attended" value={stats.presentCount ?? 0} />
-        <StatCard
-          label="Today"
-          value={stats.markedToday ? 'Present' : 'Not marked'}
-          sub={stats.markedToday?.subject?.name}
-        />
+        {statCards.map(([label, value, sub]) => (
+          <StatCard key={label} label={label} value={value} sub={sub} />
+        ))}
       </div>
 
-      <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h3 className="font-semibold text-slate-900">Subject-wise attendance</h3>
+      <section className="rounded-xl border border-white/15 bg-white/8 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+        <h3 className="font-semibold text-white">Subject-wise attendance</h3>
         {bySubject.length === 0 ? (
-          <p className="mt-3 text-sm text-slate-500">No attendance records yet.</p>
+          <p className="mt-3 text-sm text-white/70">No attendance records yet.</p>
         ) : (
-          <ul className="mt-4 divide-y divide-slate-100">
+          <ul className="mt-4 divide-y divide-white/10">
             {bySubject.map((row) => (
-              <li key={row.subject._id} className="flex items-center justify-between py-3 text-sm">
+              <li key={row.subject._id} className="flex items-center justify-between py-3 text-sm text-white/80">
                 <span>
                   {row.subject.name} ({row.subject.code})
                 </span>
-                <span className="font-semibold text-brand-700">{row.percentage}%</span>
+                <span className="font-semibold text-cyan-300">{row.percentage}%</span>
               </li>
             ))}
           </ul>
@@ -82,10 +84,10 @@ export default function StudentDashboard() {
 
 function StatCard({ label, value, sub }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-      <p className="text-xs font-medium uppercase tracking-wide text-slate-500">{label}</p>
-      <p className="mt-2 text-2xl font-bold text-slate-900">{value}</p>
-      {sub && <p className="mt-1 text-xs text-slate-500">{sub}</p>}
+    <div className="rounded-xl border border-white/15 bg-white/8 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+      <p className="text-xs font-medium uppercase tracking-wide text-white/70">{label}</p>
+      <p className="mt-2 text-2xl font-bold text-white">{value}</p>
+      {sub && <p className="mt-1 text-xs text-white/70">{sub}</p>}
     </div>
   );
 }

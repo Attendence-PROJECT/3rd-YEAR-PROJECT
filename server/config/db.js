@@ -5,6 +5,7 @@ export async function connectDB() {
   if (!uri) {
     throw new Error('MONGO_URI is not defined in environment');
   }
+
   await mongoose.connect(uri);
   console.log('MongoDB connected');
 }

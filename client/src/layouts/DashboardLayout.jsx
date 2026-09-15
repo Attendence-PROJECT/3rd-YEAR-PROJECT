@@ -2,8 +2,10 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 function navClass({ isActive }) {
-  return `block rounded-lg px-3 py-2 text-sm font-medium transition ${
-    isActive ? 'bg-brand-600 text-white' : 'text-slate-700 hover:bg-slate-100'
+  return `block rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+    isActive
+      ? 'bg-gradient-to-r from-cyan-400/90 to-sky-500/90 text-[#03131a] shadow-lg shadow-cyan-950/30'
+      : 'text-white/70 hover:bg-white/5 hover:text-white'
   }`;
 }
 
@@ -17,13 +19,14 @@ export default function DashboardLayout({ title, links }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 lg:flex">
-      <aside className="w-full border-b border-slate-200 bg-white lg:min-h-screen lg:w-64 lg:border-b-0 lg:border-r">
+    <div className="relative min-h-screen overflow-hidden bg-[#050505] text-white lg:flex">
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(5,5,5,0.7),rgba(5,5,5,0.7)),url('../../GPA.jpg')] bg-cover bg-center bg-no-repeat" />
+      <aside className="w-full border-b border-white/10 bg-black/35 backdrop-blur-xl lg:min-h-screen lg:w-72 lg:border-b-0 lg:border-r">
         <div className="p-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-brand-600">Smart Attendance</p>
-          <h1 className="mt-1 text-lg font-bold text-slate-900">{title}</h1>
-          <p className="mt-2 text-sm text-slate-500">{user?.name}</p>
-          <p className="text-xs capitalize text-slate-400">{user?.role}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Smart Attendance</p>
+          <h1 className="mt-2 text-lg font-bold text-white">{title}</h1>
+          <p className="mt-3 text-sm text-white/70">{user?.name}</p>
+          <p className="text-xs capitalize text-white/45">{user?.role}</p>
         </div>
         <nav className="space-y-1 px-3 pb-4 lg:pb-8">
           {links.map((link) => (
@@ -32,18 +35,20 @@ export default function DashboardLayout({ title, links }) {
             </NavLink>
           ))}
         </nav>
-        <div className="border-t border-slate-100 p-4">
+        <div className="border-t border-white/10 p-4">
           <button
             type="button"
             onClick={handleLogout}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-white/10"
           >
             Log out
           </button>
         </div>
       </aside>
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
-        <Outlet />
+        <div className="mx-auto max-w-7xl space-y-6">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

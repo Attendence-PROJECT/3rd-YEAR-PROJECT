@@ -2,12 +2,12 @@ export default function Alert({ type = 'error', message, onClose }) {
   if (!message) return null;
   const styles =
     type === 'success'
-      ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+      ? 'border-emerald-400/40 bg-emerald-500/10 text-emerald-200'
       : type === 'warning'
-        ? 'bg-amber-50 text-amber-900 border-amber-200'
-        : 'bg-red-50 text-red-800 border-red-200';
+        ? 'border-amber-400/40 bg-amber-500/10 text-amber-100'
+        : 'border-red-400/40 bg-red-500/10 text-red-100';
   return (
-    <div className={`mb-4 rounded-lg border px-4 py-3 text-sm ${styles} flex justify-between gap-2`}>
+    <div className={`mb-4 flex justify-between gap-2 rounded-xl border px-4 py-3 text-sm ${styles}`}>
       <span>{message}</span>
       {onClose && (
         <button type="button" onClick={onClose} className="font-semibold opacity-70 hover:opacity-100">

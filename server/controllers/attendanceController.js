@@ -6,6 +6,7 @@ import {
   subjectWiseStats,
 } from '../utils/attendanceStats.js';
 
+
 async function expireStaleSessions() {
   await AttendanceSession.updateMany(
     { status: 'active', expiresAt: { $lt: new Date() } },
@@ -15,6 +16,7 @@ async function expireStaleSessions() {
 
 export async function markAttendance(req, res) {
   try {
+
     await expireStaleSessions();
     if (req.user.role !== 'student') {
       return res.status(403).json({ message: 'Only students can mark attendance via QR' });

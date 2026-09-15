@@ -38,27 +38,27 @@ export default function TeacherReportsPage() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Reports</h2>
+      <h2 className="text-2xl font-bold text-white">Reports</h2>
       <Alert message={error} onClose={() => setError('')} />
 
-      <section className="rounded-xl border bg-white p-5 shadow-sm">
-        <h3 className="font-semibold">Class report</h3>
+      <section className="rounded-xl border border-white/15 bg-white/8 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+        <h3 className="font-semibold text-white">Class report</h3>
         <div className="mt-3 flex flex-wrap gap-2">
           <input
             placeholder="Class ID e.g. CSE-A"
             value={className}
             onChange={(e) => setClassName(e.target.value)}
-            className="rounded-lg border px-3 py-2 text-sm"
+            className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 text-sm text-white placeholder:text-white/40"
           />
-          <button type="button" onClick={loadClass} className="rounded-lg bg-brand-600 px-4 py-2 text-sm text-white">
+          <button type="button" onClick={loadClass} className="rounded-lg bg-gradient-to-r from-cyan-400 to-sky-500 px-4 py-2 text-sm font-semibold text-[#03131a]">
             Load
           </button>
         </div>
         {classReport && (
           <div className="mt-4 overflow-x-auto">
-            <table className="min-w-full text-sm">
+            <table className="min-w-full text-sm text-white/80">
               <thead>
-                <tr className="text-left text-slate-500">
+                <tr className="text-left text-white/70">
                   <th className="py-2">Student</th>
                   <th>Present</th>
                   <th>%</th>
@@ -66,12 +66,12 @@ export default function TeacherReportsPage() {
               </thead>
               <tbody>
                 {classReport.students.map((row) => (
-                  <tr key={row.student._id} className="border-t">
+                  <tr key={row.student._id} className="border-t border-white/10">
                     <td className="py-2">{row.student.name}</td>
                     <td>
                       {row.present}/{row.totalSessions}
                     </td>
-                    <td className={row.belowThreshold ? 'text-red-600 font-semibold' : ''}>
+                    <td className={row.belowThreshold ? 'font-semibold text-red-400' : ''}>
                       {row.percentage}%
                     </td>
                   </tr>
@@ -82,30 +82,30 @@ export default function TeacherReportsPage() {
         )}
       </section>
 
-      <section className="rounded-xl border bg-white p-5 shadow-sm">
-        <h3 className="font-semibold">Subject report</h3>
+      <section className="rounded-xl border border-white/15 bg-white/8 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+        <h3 className="font-semibold text-white">Subject report</h3>
         <div className="mt-3 flex flex-wrap gap-2">
           <select
             value={subjectId}
             onChange={(e) => setSubjectId(e.target.value)}
-            className="rounded-lg border px-3 py-2 text-sm"
+            className="rounded-lg border border-white/15 bg-black/20 px-3 py-2 text-sm text-white"
           >
-            <option value="">Select subject</option>
+            <option value="" className="text-slate-900">Select subject</option>
             {subjects.map((s) => (
-              <option key={s._id} value={s._id}>
+              <option key={s._id} value={s._id} className="text-slate-900">
                 {s.code} — {s.name}
               </option>
             ))}
           </select>
-          <button type="button" onClick={loadSubject} className="rounded-lg bg-brand-600 px-4 py-2 text-sm text-white">
+          <button type="button" onClick={loadSubject} className="rounded-lg bg-gradient-to-r from-cyan-400 to-sky-500 px-4 py-2 text-sm font-semibold text-[#03131a]">
             Load
           </button>
         </div>
         {subjectReport && (
           <div className="mt-4 overflow-x-auto">
-            <table className="min-w-full text-sm">
+            <table className="min-w-full text-sm text-white/80">
               <thead>
-                <tr className="text-left text-slate-500">
+                <tr className="text-left text-white/70">
                   <th className="py-2">Student</th>
                   <th>Present</th>
                   <th>%</th>
@@ -113,7 +113,7 @@ export default function TeacherReportsPage() {
               </thead>
               <tbody>
                 {subjectReport.students.map((row) => (
-                  <tr key={row.student._id} className="border-t">
+                  <tr key={row.student._id} className="border-t border-white/10">
                     <td className="py-2">{row.student.name}</td>
                     <td>
                       {row.present}/{row.totalSessions}

@@ -25,16 +25,22 @@ export default function AdminDashboard() {
     below75: overview.studentsBelow75.filter((s) => s.class === cls).length,
   }));
 
+  const cards = [
+    ['Total students', overview.totalStudents],
+    ['Total teachers', overview.totalTeachers ?? '—'],
+    ['Total subjects', overview.totalSubjects ?? '—'],
+    ["Today's attendance", overview.todayAttendance ?? '—'],
+    ['Average attendance', `${overview.averageAttendance ?? 0}%`],
+    ['Students below 75%', overview.studentsBelow75.length],
+  ];
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Admin overview</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <Card label="Total students" value={overview.totalStudents} />
-        <Card label="Total teachers" value={overview.totalTeachers ?? '—'} />
-        <Card label="Total subjects" value={overview.totalSubjects ?? '—'} />
-        <Card label="Today's attendance" value={overview.todayAttendance ?? '—'} />
-        <Card label="Average attendance" value={`${overview.averageAttendance ?? 0}%`} />
-        <Card label="Students below 75%" value={overview.studentsBelow75.length} />
+        {cards.map(([label, value]) => (
+          <Card key={label} label={label} value={value} />
+        ))}
       </div>
 
       <section className="rounded-xl border bg-white p-5 shadow-sm">
